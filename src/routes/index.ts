@@ -1,16 +1,11 @@
 import { Router } from 'express';
+import '../database';
 
-const router = Router();
+import { UsersController } from '../controllers/UsersController';
+const usersController = new UsersController();
 
-router.post('/users', (request, response) => {
-  const { name, email } = request.body;
+const routes = Router();
 
-  const user = {
-    name,
-    email,
-  };
+routes.post('/users', usersController.create);
 
-  return response.json(user);
-});
-
-export default router;
+export { routes };
